@@ -9,10 +9,17 @@ import { Server } from "socket.io";
 import  http  from "http";
 
 const app = express();
+
+const corsOptions = {
+  origin: 'https://main.d3tsvzyxdn3mmt.amplifyapp.com',
+  credentials: true,
+  optionSuccessStatus: 200,
+};
+
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.static("public"));
 
 import adminRouter from "./routes/admin.js";
