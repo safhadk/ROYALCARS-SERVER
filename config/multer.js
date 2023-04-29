@@ -4,7 +4,7 @@ import fs from 'fs'
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
       // const uploadPath = '../client/public/safad';
-      const uploadPath = 'https://main.d3tsvzyxdn3mmt.amplifyapp.com/public/safad';
+      const uploadPath = 'https://main.d3tsvzyxdn3mmt.amplifyapp.com/safad';
 
 
     console.log("multer here")
