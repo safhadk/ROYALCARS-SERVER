@@ -401,17 +401,18 @@ export const message = async (req, res) => {
 export const getmessage = async (req, res) => {
     console.log("entered to get message")
     try {
+        const userId=req.user._id
         if (req.query.ownerId) {
             console.log(req.query, "owner id in get message")
             const message = await messages.findOne({
                 user: req.user._id,
                 owner: req.query.ownerId,
             })
+            console.log(userId,"52")
             res.status(200).json(message)
         } else {
             console.log("user role")
             const message = await messages.find({ user: req.user._id }).populate('owner')
-            console.log(message);
             res.status(200).json(message);
         }
 

@@ -18,6 +18,6 @@ router.get('/checkverify',verifyToken,checkverify)
 router.post('/message',verifyToken,message)
 router.get('/message',verifyToken,getmessage)
 router.post('/otp',OTP)
-router.get('/locations',verifyToken,location)
+router.get('/locations',location)
 
 export default router;
