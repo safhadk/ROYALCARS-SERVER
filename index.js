@@ -12,7 +12,7 @@ const app = express();
 
 const corsOptions = {
   // origin: 'https://main.d3tsvzyxdn3mmt.amplifyapp.com',
-  origin: 'http://localhost:2000',
+  origin: 'https://gallery-pass-frontend-bv52.vercel.app',
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -35,7 +35,7 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-      origin: "gallery-pass-frontend.vercel.app",
+      origin: "https://gallery-pass-frontend-bv52.vercel.app",
       //  origin: "http://localhost:2000",
       methods: ["GET", "POST"],
     },
