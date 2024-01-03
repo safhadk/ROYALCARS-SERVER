@@ -1,71 +1,39 @@
 import express from "express";
 import mongoose from "mongoose";
-import cors from "cors";
 import dotenv from "dotenv";
 import morgan from "morgan";
-dotenv.config();
-import { Server } from "socket.io";
+import cors from "cors";
+import http from "http";
 
-import  http  from "http";
+dotenv.config();
 
 const app = express();
 
+// CORS configuration
 const corsOptions = {
-  // origin: 'https://main.d3tsvzyxdn3mmt.amplifyapp.com',
-  origin: 'https://gallery-pass-frontend-bv52.vercel.app',
+  origin: ['https://gallery-pass-frontend-bv52.vercel.app', 'http://localhost:2000'],
   credentials: true,
   optionSuccessStatus: 200,
 };
 
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions)); // Enable pre-flight across-the-board
+
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(morgan("dev"));
 app.use(express.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors(corsOptions));
 app.use(express.static("public"));
 
-import adminRouter from "./routes/admin.js";
-import userRouter from "./routes/users.js";
-import ownerRouter from "./routes/owner.js";
-
-app.use("/owner", ownerRouter);
-app.use("/admin", adminRouter);
-app.use("/", userRouter);
-
-const server = http.createServer(app);
-
-const io = new Server(server, {
-    cors: {
-      origin: "https://gallery-pass-frontend-bv52.vercel.app",
-      //  origin: "http://localhost:2000",
-      methods: ["GET", "POST"],
-    },
-  });
-  
-
-  io.on("connection", (socket) => {
-    console.log(`User Connected: ${socket.id}`);
-  
-    socket.on("join_room", (data) => {
-      socket.join(data);
-      console.log(`User with ID: ${socket.id} joined room: ${data}`);
-    });
-  
-    socket.on("send_message", (data) => {
-      socket.to(data.room).emit("receive_message", data);
-    });
-  
-    socket.on("disconnect", () => {
-      console.log("User Disconnected", socket.id);
-    });
-  });
+// ... (your routes and other middleware)
 
 /* MONGOOSE SETUP */
-const PORT = process.env.PORT;
-mongoose.connect(process.env.MONGO_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
-    .then(() => {
-        server.listen(PORT, () => console.log(`Server Port: ${PORT}`));
-    })
-    .catch((error) => console.log(`${error} did not connect`));
+const PORT = process.env.PORT || 5000; // Set a default port if not provided
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
+  })
+  .catch((error) => console.log(`${error} did not connect`));
