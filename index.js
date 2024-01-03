@@ -3,21 +3,13 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import morgan from "morgan";
 import cors from "cors";
-import http from "http";
 
 dotenv.config();
 
 const app = express();
 
-// CORS configuration
-const corsOptions = {
-  origin: ['https://gallery-pass-frontend-bv52.vercel.app', 'http://localhost:2000'],
-  credentials: true,
-  optionSuccessStatus: 200,
-};
-
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions)); // Enable pre-flight across-the-board
+// Enable CORS for all routes
+app.use(cors());
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(morgan("dev"));
