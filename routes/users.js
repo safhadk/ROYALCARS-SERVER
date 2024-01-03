@@ -1,8 +1,9 @@
 import express from "express";
 import upload from "../config/multer.js";
-import {LoginPost, Register,Cars,Search,CreateOrder,VerifyPayment,Bookings,bookingDetails,Profile,UpdateProfile,checkverify,message,getmessage,OTP,location} from "../controller/usersController.js";
+import {LoginPost, Register,Cars,Search,CreateOrder,VerifyPayment,Bookings,bookingDetails,Profile,UpdateProfile,checkverify,message,getmessage,OTP,location,scanner} from "../controller/usersController.js";
 import { verifyToken } from "../middleware/auth.js";
 const router = express.Router();
+const scannedQRCodes = new Set();
 
 router.post("/register", Register);
 router.post("/login", LoginPost);
@@ -19,5 +20,8 @@ router.post('/message',verifyToken,message)
 router.get('/message',verifyToken,getmessage)
 router.post('/otp',OTP)
 router.get('/locations',location)
+router.post('/scan',scanner)
+
+
 
 export default router;

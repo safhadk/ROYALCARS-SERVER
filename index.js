@@ -11,8 +11,8 @@ import  http  from "http";
 const app = express();
 
 const corsOptions = {
-  origin: 'https://main.d3tsvzyxdn3mmt.amplifyapp.com',
-  // origin: 'http://localhost:2000',
+  // origin: 'https://main.d3tsvzyxdn3mmt.amplifyapp.com',
+  origin: 'http://localhost:2000',
   credentials: true,
   optionSuccessStatus: 200,
 };
@@ -36,7 +36,7 @@ const server = http.createServer(app);
 const io = new Server(server, {
     cors: {
       // origin: "https://main.d3tsvzyxdn3mmt.amplifyapp.com",
-      //  origin: "http://localhost:2000",
+       origin: "http://localhost:2000",
       methods: ["GET", "POST"],
     },
   });

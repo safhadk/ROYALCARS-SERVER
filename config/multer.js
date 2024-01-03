@@ -3,8 +3,8 @@ import fs from 'fs'
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-      // const uploadPath = '../client/public/safad';
-      const uploadPath = 'https://main.d3tsvzyxdn3mmt.amplifyapp.com/public/safad';
+      const uploadPath = '../client/public/safad';
+      // const uploadPath = 'https://main.d3tsvzyxdn3mmt.amplifyapp.com/public/safad';
     console.log("multer here")
     if (!fs.existsSync(uploadPath)) {
       fs.mkdirSync(uploadPath);
