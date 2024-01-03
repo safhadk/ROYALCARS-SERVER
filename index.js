@@ -35,8 +35,8 @@ const server = http.createServer(app);
 
 const io = new Server(server, {
     cors: {
-      // origin: "https://main.d3tsvzyxdn3mmt.amplifyapp.com",
-       origin: "http://localhost:2000",
+      origin: "gallery-pass-frontend.vercel.app",
+      //  origin: "http://localhost:2000",
       methods: ["GET", "POST"],
     },
   });
