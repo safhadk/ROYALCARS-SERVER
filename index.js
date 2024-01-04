@@ -11,7 +11,7 @@ const app = express();
 // Enable CORS for all routes, including your frontend
 const corsOptions = {
   origin: [
-    'https://royalcars-server.vercel.app',
+    'https://royalcars.onrender.com',
     'http://localhost:2000',
     'https://gallery-pass-frontend-bv52.vercel.app' // <-- Added your frontend URL
   ],
