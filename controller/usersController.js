@@ -483,6 +483,7 @@ export const location = async (req, res) => {
 
 export const scanner = async (req, res) => {
   try {
+    console.log(qrCode.text, "qr data1");
     const { qrCode } = req.body;
     console.log(qrCode.text, "qr data");
 

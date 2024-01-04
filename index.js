@@ -9,14 +9,14 @@ dotenv.config();
 const app = express();
 
 // Enable CORS for all routes
-// app.use(cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://gallery-pass-frontend-bv52.vercel.app');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 
-// Allow specific origins
-app.use(cors({
-  origin: ['https://gallery-pass-frontend-bv52.vercel.app', 'http://localhost:2000'],
-  credentials: true,
-  optionSuccessStatus: 200,
-}));
+
 
 app.use(express.json({ limit: "30mb", extended: true }));
 app.use(morgan("dev"));
