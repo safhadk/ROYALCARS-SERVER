@@ -10,7 +10,7 @@ const app = express();
 
 // Enable CORS for all routes
 const corsOptions = {
-  origin: ['https://royalcars-server.vercel.app', 'http://localhost:2000'],
+  origin: ['https://royalcars-server.vercel.app', 'http://localhost:2000', 'https://gallery-pass-frontend-bv52.vercel.app'],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
