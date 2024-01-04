@@ -9,12 +9,22 @@ dotenv.config();
 const app = express();
 
 // Enable CORS for all routes
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://gallery-pass-frontend-bv52.vercel.app');
-  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+const corsOptions = {
+  origin: ['https://royalcars-server.vercel.app', 'http://localhost:2000'],
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true,
+  optionsSuccessStatus: 204,
+};
+
+app.use(cors(corsOptions));
+
+// app.options('*', (req, res) => {
+//   res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+//   res.header('Access-Control-Allow-Headers', '*');
+//   res.status(200).send();
+// });
+
+
 
 
 
@@ -35,4 +45,8 @@ mongoose
   .then(() => {
     app.listen(PORT, () => console.log(`Server Port: ${PORT}`));
   })
-  .catch((error) => console.log(`${error} did not connect`));
+  .catch((error) => {
+    console.error('MongoDB connection error:', error);
+    process.exit(1); // Exit the application on database connection error
+  });
+

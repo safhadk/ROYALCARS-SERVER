@@ -480,10 +480,8 @@ export const location = async (req, res) => {
     }
 }
 
-
 export const scanner = async (req, res) => {
   try {
-    console.log(qrCode.text, "qr data1");
     const { qrCode } = req.body;
     console.log(qrCode.text, "qr data");
 
@@ -491,18 +489,19 @@ export const scanner = async (req, res) => {
     const existingQRCode = await QRCode.findOne({ text: qrCode.text });
 
     if (existingQRCode) {
-        console.log(existingQRCode)
-      console.log("already");
-      res.json({ message: 'QR code already scanned' });
-    } else {
-      console.log("new scanning");
-
-      // Save the QR code to the database
-      const newQRCode = new QRCode({ text: qrCode.text });
-      await newQRCode.save();
-
-      res.json({ message: 'QR code scanned successfully' });
-    }
+        console.log(existingQRCode);
+        console.log("QR code already scanned");
+        res.status(200).json({ message: 'QR code already scanned' });
+     } else {
+        console.log("New QR code scanning");
+     
+        // Save the QR code to the database
+        const newQRCode = new QRCode({ text: qrCode.text });
+        await newQRCode.save();
+     
+        res.status(200).json({ message: 'QR code scanned successfully' });
+     }
+     
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
